@@ -6,6 +6,7 @@
 .pnp.js
 .yalc
 .yarn/install-state.gz
+.yalc
 
 # testing
 /coverage
