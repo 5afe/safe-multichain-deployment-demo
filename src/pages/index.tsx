@@ -5,20 +5,20 @@ import styles from "@/styles/Home.module.css";
 import {
   useAccount,
   useDisconnect,
-  usePublicClient,
   useSwitchChain,
+  useWalletClient,
 } from "wagmi";
 import { gnosis, base, polygon, sepolia, Chain } from "viem/chains";
-import { createWalletClient, custom } from "viem";
 
 import {
   SafeProvider,
   createConfig,
   useSafe,
-  useSendTransaction,
+  useSendSafeOperation,
 } from "@safe-global/safe-react-hooks";
 
-const chains = [gnosis, base, polygon, sepolia] as const;
+// const chains = [gnosis, base, polygon, sepolia] as const;
+const chains = [gnosis, base, polygon] as const;
 
 const PIMLICO_API_KEY = "f8492c09-7cad-43ed-83d3-548a3692583d";
 
@@ -219,53 +219,15 @@ function SafeAccountComponent({
 
   const safeInfo = getSafeInfo();
 
-  // const publicClient = usePublicClient();
+  const safeAddress = safeInfo?.data?.address;
+  const isSafeDeployed = safeInfo?.data?.isDeployed;
+  const chainLabel = chainShortname[chain.id];
+  const baseWalletUrl = `https://app.safe.global/home?safe=`;
+  const walletUrl = `${baseWalletUrl}${chainLabel}:${safeAddress}`;
 
-  // const client = createWalletClient({
-  //   chain,
-  //   transport: custom(publicClient!),
-  // });
+  const { data: walletClient } = useWalletClient();
 
-  // const config = safeInfo?.data?.address
-  //   ? createConfig({
-  //       chain: chain as any,
-  //       provider: { request: client.request as any },
-  //       signer: ownerAddress,
-  //       safeAddress: safeInfo.data.address,
-  //     })
-  //   : undefined;
-
-  // const { sendTransaction } = useSendTransaction({ config });
-  const { sendTransaction } = useSendTransaction();
-
-  const transactions = [
-    {
-      to: safeInfo?.data?.address as string,
-      data: "0x",
-      value: "0",
-    },
-  ];
-
-  const { chains, switchChain } = useSwitchChain();
-
-  console.log(
-    "chain.name: ",
-    chain.name,
-    " address: ",
-    safeInfo?.data?.address,
-    " isDeployed: ",
-    safeInfo?.data?.isDeployed
-  );
-
-  const walletUrl = `https://app.safe.global/home?safe=${
-    chainShortname[chain.id]
-  }:${safeInfo?.data?.address}`;
-
-  // transaction + deploy
-  async function deploySafeAccount() {
-    switchChain({ chainId: chain.id });
-    sendTransaction({ transactions });
-  }
+  const showDeploySafeButton = safeAddress && !isSafeDeployed && walletClient;
 
   return (
     <>
@@ -281,15 +243,70 @@ function SafeAccountComponent({
           <a href={walletUrl} target={"_blank"}>
             {safeInfo?.data?.address}
           </a>{" "}
-          {!safeInfo?.data?.isDeployed && (
-            <button onClick={deploySafeAccount} className={styles.button}>
-              Deploy Safe
-            </button>
+          {showDeploySafeButton && (
+            <DeploySafeButton
+              chain={chain}
+              safeAddress={safeInfo?.data?.address}
+              signer={ownerAddress}
+              walletClient={walletClient}
+            />
           )}
         </>
       ) : (
         <span>Loading...</span>
       )}
     </>
+  );
+}
+
+function DeploySafeButton({ chain, safeAddress, signer, walletClient }: any) {
+  const { switchChain } = useSwitchChain();
+
+  const safeOptions = {
+    owners: [signer!],
+    threshold: 1,
+    saltNonce: "123",
+  };
+
+  // Bundler URL
+  const BUNDLER_URL = `https://api.pimlico.io/v2/${chain.name.toLowerCase()}/rpc?apikey=${PIMLICO_API_KEY}`; // PIMLICO
+
+  // Paymaster URL
+  const PAYMASTER_URL = `https://api.pimlico.io/v2/${chain.name.toLowerCase()}/rpc?apikey=${PIMLICO_API_KEY}`; // PIMLICO
+
+  const config = createConfig({
+    chain,
+    provider: {
+      request: walletClient.request,
+    },
+    signer: signer!,
+    safeOptions,
+    safeOperationOptions: {
+      isSponsored: true,
+      bundlerUrl: BUNDLER_URL,
+      paymasterUrl: PAYMASTER_URL,
+    },
+  });
+
+  const { sendSafeOperation } = useSendSafeOperation({ config });
+
+  const transactions = [
+    {
+      to: safeAddress,
+      data: "0x",
+      value: "0",
+    },
+  ];
+
+  // transaction + deploy
+  async function deploySafeAccount() {
+    switchChain({ chainId: chain.id });
+    sendSafeOperation({ transactions });
+  }
+
+  return (
+    <button onClick={deploySafeAccount} className={styles.button}>
+      Deploy Safe
+    </button>
   );
 }
