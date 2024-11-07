@@ -1,51 +1,51 @@
-import Head from "next/head";
-import Image from "next/image";
-import localFont from "next/font/local";
-import styles from "@/styles/Home.module.css";
+import Head from 'next/head'
+import Image from 'next/image'
+import localFont from 'next/font/local'
+import styles from '@/styles/Home.module.css'
 import {
   useAccount,
   useDisconnect,
   useSwitchChain,
-  useWalletClient,
-} from "wagmi";
-import { gnosis, base, polygon, sepolia, Chain } from "viem/chains";
+  useWalletClient
+} from 'wagmi'
+import { gnosis, base, polygon, sepolia, Chain } from 'viem/chains'
 
 import {
   SafeProvider,
   createConfig,
   useSafe,
-  useSendSafeOperation,
-} from "@safe-global/safe-react-hooks";
+  useSendSafeOperation
+} from '@safe-global/safe-react-hooks'
 
-const chains = [gnosis, base, polygon, sepolia] as const;
+const chains = [gnosis, base, polygon, sepolia] as const
 
-const PIMLICO_API_KEY = "pim_mAzX6WFFpSLoZDDWDKHsSE";
+const PIMLICO_API_KEY = 'pim_mAzX6WFFpSLoZDDWDKHsSE'
 
 const chainLogo: Record<number, string> = {
-  [gnosis.id]: "/gnosis.png",
-  [base.id]: "/base.png",
-  [polygon.id]: "/polygon.png",
-  [sepolia.id]: "/sepolia.png",
+  [gnosis.id]: '/gnosis.png',
+  [base.id]: '/base.png',
+  [polygon.id]: '/polygon.png',
+  [sepolia.id]: '/sepolia.png'
   // [arbitrum.id]: "/arbitrum.png",
   // [optimism.id]: "/optimism.png",
-};
+}
 
 const chainShortname: Record<number, string> = {
-  [gnosis.id]: "gno",
-  [base.id]: "base",
-  [polygon.id]: "matic",
-  [sepolia.id]: "sep",
+  [gnosis.id]: 'gno',
+  [base.id]: 'base',
+  [polygon.id]: 'matic',
+  [sepolia.id]: 'sep'
   // [arbitrum.id]: "arb1",
   // [optimism.id]: "oeth",
-};
+}
 
 function App() {
-  const { address } = useAccount();
+  const { address } = useAccount()
 
-  const { openConnectModal } = useConnectModal();
-  const { disconnect } = useDisconnect();
+  const { openConnectModal } = useConnectModal()
+  const { disconnect } = useDisconnect()
 
-  const isSignerConnected = !!address;
+  const isSignerConnected = !!address
 
   return (
     <div className={styles.content}>
@@ -76,29 +76,29 @@ function App() {
               const safeOptions = {
                 owners: [address!],
                 threshold: 1,
-                saltNonce: "123",
-              };
+                saltNonce: '123'
+              }
 
               // Bundler URL
-              const BUNDLER_URL = `https://api.pimlico.io/v2/${chain.id}/rpc?apikey=${PIMLICO_API_KEY}`; // PIMLICO
+              const BUNDLER_URL = `https://api.pimlico.io/v2/${chain.id}/rpc?apikey=${PIMLICO_API_KEY}` // PIMLICO
 
               // Paymaster URL
-              const PAYMASTER_URL = `https://api.pimlico.io/v2/${chain.id}/rpc?apikey=${PIMLICO_API_KEY}`; // PIMLICO
+              const PAYMASTER_URL = `https://api.pimlico.io/v2/${chain.id}/rpc?apikey=${PIMLICO_API_KEY}` // PIMLICO
 
               const config = createConfig({
                 chain: chain as any,
                 provider:
-                  chain.name === "Sepolia"
-                    ? "https://sepolia.gateway.tenderly.co"
+                  chain.name === 'Sepolia'
+                    ? 'https://sepolia.gateway.tenderly.co'
                     : chain.rpcUrls.default.http[0],
                 signer: address!,
                 safeOptions,
                 safeOperationOptions: {
                   isSponsored: true,
                   bundlerUrl: BUNDLER_URL,
-                  paymasterUrl: PAYMASTER_URL,
-                },
-              });
+                  paymasterUrl: PAYMASTER_URL
+                }
+              })
 
               return (
                 <SafeProvider config={config} key={chain.id}>
@@ -110,7 +110,7 @@ function App() {
                     />
                   </li>
                 </SafeProvider>
-              );
+              )
             })}
           </ul>
         </div>
@@ -120,38 +120,38 @@ function App() {
         </button>
       )}
     </div>
-  );
+  )
 }
 
 import {
   getDefaultConfig,
   RainbowKitProvider,
-  useConnectModal,
-} from "@rainbow-me/rainbowkit";
-import { WagmiProvider } from "wagmi";
-import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+  useConnectModal
+} from '@rainbow-me/rainbowkit'
+import { WagmiProvider } from 'wagmi'
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 
-import "@rainbow-me/rainbowkit/styles.css";
+import '@rainbow-me/rainbowkit/styles.css'
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient()
 
 const config = getDefaultConfig({
-  appName: "My RainbowKit App",
-  projectId: "YOUR_PROJECT_ID",
+  appName: 'My RainbowKit App',
+  projectId: 'YOUR_PROJECT_ID',
   chains: chains,
-  ssr: true, // If your dApp uses server side rendering (SSR)
-});
+  ssr: true // If your dApp uses server side rendering (SSR)
+})
 
 const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
+  src: './fonts/GeistVF.woff',
+  variable: '--font-geist-sans',
+  weight: '100 900'
+})
 const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+  src: './fonts/GeistMonoVF.woff',
+  variable: '--font-geist-mono',
+  weight: '100 900'
+})
 
 export default function Home() {
   return (
@@ -203,33 +203,33 @@ export default function Home() {
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
-  );
+  )
 }
 
 type SafeAccountComponentType = {
-  chain: Chain;
-  chainLogo: string;
-  ownerAddress: string;
-};
+  chain: Chain
+  chainLogo: string
+  ownerAddress: string
+}
 
 function SafeAccountComponent({
   chain,
   chainLogo,
-  ownerAddress,
+  ownerAddress
 }: SafeAccountComponentType) {
-  const { getSafeInfo } = useSafe();
+  const { getSafeInfo } = useSafe()
 
-  const safeInfo = getSafeInfo();
+  const safeInfo = getSafeInfo()
 
-  const safeAddress = safeInfo?.data?.address;
-  const isSafeDeployed = safeInfo?.data?.isDeployed;
-  const chainLabel = chainShortname[chain.id];
-  const baseWalletUrl = `https://app.safe.global/home?safe=`;
-  const walletUrl = `${baseWalletUrl}${chainLabel}:${safeAddress}`;
+  const safeAddress = safeInfo?.data?.address
+  const isSafeDeployed = safeInfo?.data?.isDeployed
+  const chainLabel = chainShortname[chain.id]
+  const baseWalletUrl = `https://app.safe.global/home?safe=`
+  const walletUrl = `${baseWalletUrl}${chainLabel}:${safeAddress}`
 
-  const { data: walletClient } = useWalletClient();
+  const { data: walletClient } = useWalletClient()
 
-  const showDeploySafeButton = safeAddress && !isSafeDeployed && walletClient;
+  const showDeploySafeButton = safeAddress && !isSafeDeployed && walletClient
 
   return (
     <>
@@ -239,12 +239,12 @@ function SafeAccountComponent({
         alt={`${chain.name} icon`}
         width={24}
         height={24}
-      />{" "}
+      />{' '}
       {!!safeInfo?.data?.address ? (
         <>
-          <a href={walletUrl} target={"_blank"}>
+          <a href={walletUrl} target={'_blank'}>
             {safeInfo?.data?.address}
-          </a>{" "}
+          </a>{' '}
           {showDeploySafeButton && (
             <DeploySafeButton
               chain={chain}
@@ -258,57 +258,57 @@ function SafeAccountComponent({
         <span>Loading...</span>
       )}
     </>
-  );
+  )
 }
 
 function DeploySafeButton({ chain, safeAddress, signer, walletClient }: any) {
-  const { switchChain } = useSwitchChain();
+  const { switchChain } = useSwitchChain()
 
   const safeOptions = {
     owners: [signer!],
     threshold: 1,
-    saltNonce: "123",
-  };
+    saltNonce: '123'
+  }
 
   // Bundler URL
-  const BUNDLER_URL = `https://api.pimlico.io/v2/${chain.id}/rpc?apikey=${PIMLICO_API_KEY}`; // PIMLICO
+  const BUNDLER_URL = `https://api.pimlico.io/v2/${chain.id}/rpc?apikey=${PIMLICO_API_KEY}` // PIMLICO
 
   // Paymaster URL
-  const PAYMASTER_URL = `https://api.pimlico.io/v2/${chain.id}/rpc?apikey=${PIMLICO_API_KEY}`; // PIMLICO
+  const PAYMASTER_URL = `https://api.pimlico.io/v2/${chain.id}/rpc?apikey=${PIMLICO_API_KEY}` // PIMLICO
 
   const config = createConfig({
     chain,
     provider: {
-      request: walletClient.request,
+      request: walletClient.request
     },
     signer: signer!,
     safeOptions,
     safeOperationOptions: {
       isSponsored: true,
       bundlerUrl: BUNDLER_URL,
-      paymasterUrl: PAYMASTER_URL,
-    },
-  });
+      paymasterUrl: PAYMASTER_URL
+    }
+  })
 
-  const { sendSafeOperation } = useSendSafeOperation({ config });
+  const { sendSafeOperation } = useSendSafeOperation({ config })
 
   const transactions = [
     {
       to: safeAddress,
-      data: "0x",
-      value: "0",
-    },
-  ];
+      data: '0x',
+      value: '0'
+    }
+  ]
 
   // transaction + deploy
   async function deploySafeAccount() {
-    switchChain({ chainId: chain.id });
-    sendSafeOperation({ transactions });
+    switchChain({ chainId: chain.id })
+    sendSafeOperation({ transactions })
   }
 
   return (
     <button onClick={deploySafeAccount} className={styles.button}>
       Deploy Safe
     </button>
-  );
+  )
 }
