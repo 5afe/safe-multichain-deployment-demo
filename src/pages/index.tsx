@@ -1,14 +1,13 @@
+import styles from '@/styles/Home.module.css'
 import Head from 'next/head'
 import Image from 'next/image'
-import localFont from 'next/font/local'
-import styles from '@/styles/Home.module.css'
+import { Chain, base, gnosis, polygon, sepolia } from 'viem/chains'
 import {
   useAccount,
   useDisconnect,
   useSwitchChain,
   useWalletClient
 } from 'wagmi'
-import { gnosis, base, polygon, sepolia, Chain } from 'viem/chains'
 
 import {
   SafeProvider,
@@ -124,12 +123,12 @@ function App() {
 }
 
 import {
-  getDefaultConfig,
   RainbowKitProvider,
+  getDefaultConfig,
   useConnectModal
 } from '@rainbow-me/rainbowkit'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { WagmiProvider } from 'wagmi'
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 
 import '@rainbow-me/rainbowkit/styles.css'
 
@@ -140,17 +139,6 @@ const config = getDefaultConfig({
   projectId: 'YOUR_PROJECT_ID',
   chains: chains,
   ssr: true // If your dApp uses server side rendering (SSR)
-})
-
-const geistSans = localFont({
-  src: './fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-  weight: '100 900'
-})
-const geistMono = localFont({
-  src: './fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
-  weight: '100 900'
 })
 
 export default function Home() {
@@ -168,7 +156,7 @@ export default function Home() {
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <div
-            className={`${styles.page} ${geistSans.variable} ${geistMono.variable}`}
+            className={`${styles.page}`}
           >
             <Image
               className={styles.logo}
@@ -243,7 +231,7 @@ function SafeAccountComponent({
       {!!safeInfo?.data?.address ? (
         <>
           <a href={walletUrl} target={'_blank'}>
-            {safeInfo?.data?.address}
+            <pre>{safeInfo?.data?.address}</pre>
           </a>{' '}
           {showDeploySafeButton && (
             <DeploySafeButton
