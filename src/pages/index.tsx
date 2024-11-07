@@ -17,10 +17,9 @@ import {
   useSendSafeOperation,
 } from "@safe-global/safe-react-hooks";
 
-// const chains = [gnosis, base, polygon, sepolia] as const;
-const chains = [gnosis, base, polygon] as const;
+const chains = [gnosis, base, polygon, sepolia] as const;
 
-const PIMLICO_API_KEY = "f8492c09-7cad-43ed-83d3-548a3692583d";
+const PIMLICO_API_KEY = "pim_mAzX6WFFpSLoZDDWDKHsSE";
 
 const chainLogo: Record<number, string> = {
   [gnosis.id]: "/gnosis.png",
@@ -81,14 +80,17 @@ function App() {
               };
 
               // Bundler URL
-              const BUNDLER_URL = `https://api.pimlico.io/v2/${chain.name.toLowerCase()}/rpc?apikey=${PIMLICO_API_KEY}`; // PIMLICO
+              const BUNDLER_URL = `https://api.pimlico.io/v2/${chain.id}/rpc?apikey=${PIMLICO_API_KEY}`; // PIMLICO
 
               // Paymaster URL
-              const PAYMASTER_URL = `https://api.pimlico.io/v2/${chain.name.toLowerCase()}/rpc?apikey=${PIMLICO_API_KEY}`; // PIMLICO
+              const PAYMASTER_URL = `https://api.pimlico.io/v2/${chain.id}/rpc?apikey=${PIMLICO_API_KEY}`; // PIMLICO
 
               const config = createConfig({
                 chain: chain as any,
-                provider: chain.rpcUrls.default.http[0],
+                provider:
+                  chain.name === "Sepolia"
+                    ? "https://sepolia.gateway.tenderly.co"
+                    : chain.rpcUrls.default.http[0],
                 signer: address!,
                 safeOptions,
                 safeOperationOptions: {
@@ -269,10 +271,10 @@ function DeploySafeButton({ chain, safeAddress, signer, walletClient }: any) {
   };
 
   // Bundler URL
-  const BUNDLER_URL = `https://api.pimlico.io/v2/${chain.name.toLowerCase()}/rpc?apikey=${PIMLICO_API_KEY}`; // PIMLICO
+  const BUNDLER_URL = `https://api.pimlico.io/v2/${chain.id}/rpc?apikey=${PIMLICO_API_KEY}`; // PIMLICO
 
   // Paymaster URL
-  const PAYMASTER_URL = `https://api.pimlico.io/v2/${chain.name.toLowerCase()}/rpc?apikey=${PIMLICO_API_KEY}`; // PIMLICO
+  const PAYMASTER_URL = `https://api.pimlico.io/v2/${chain.id}/rpc?apikey=${PIMLICO_API_KEY}`; // PIMLICO
 
   const config = createConfig({
     chain,
