@@ -41,10 +41,12 @@ export default function SafeAccount({
         <pre>Loading...</pre>
       ) : (
         <>
-          <a href={walletUrl} target="_blank">
-            <pre>{safeInfo?.address}</pre>
-          </a>
-
+          <pre>{safeInfo?.address}</pre>
+          {!!safeInfo?.isDeployed && (
+            <a href={walletUrl} target="_blank">
+              <button>Open app</button>
+            </a>
+          )}
           {walletClient && (
             <DeploySafeButton
               chain={chain}

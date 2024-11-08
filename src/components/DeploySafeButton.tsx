@@ -22,13 +22,12 @@ export default function DeploySafeButton({
   isDeployed,
   walletClient
 }: DeploySafeButtonProps) {
+  const [isDeploymentLoading, setIsDeploymentLoading] = useState(false)
+  const [deploymentUserOp, setDeploymentUserOp] = useState('')
   const { switchChainAsync } = useSwitchChain()
 
   const showDeploySafeButton = safeAddress && !isDeployed && walletClient
-
-  const [isDeploymentLoading, setIsDeploymentLoading] = useState(false)
-  const [deploymentUserOp, setDeploymentUserOp] = useState('')
-
+  
   const BUNDLER_URL = `https://api.pimlico.io/v2/${chain.id}/rpc?apikey=${PIMLICO_API_KEY}`
   const PAYMASTER_URL = `https://api.pimlico.io/v2/${chain.id}/rpc?apikey=${PIMLICO_API_KEY}`
 
@@ -49,7 +48,6 @@ export default function DeploySafeButton({
       paymasterUrl: PAYMASTER_URL
     }
   })
-
   const { sendSafeOperationAsync } = useSendSafeOperation({ config })
 
   const transactions = [
@@ -61,31 +59,32 @@ export default function DeploySafeButton({
   ]
 
   async function deploySafeAccount() {
-    setIsDeploymentLoading(true)
-    await switchChainAsync({ chainId: chain.id })
-    const { safeOperations } = await sendSafeOperationAsync({ transactions })
-
-    const deploymentUserOpLink = `https://jiffyscan.xyz/userOpHash/${safeOperations?.userOperationHash}?network=${chain.name.toLowerCase()}`
-
-    setDeploymentUserOp(deploymentUserOpLink)
-    setIsDeploymentLoading(false)
+    try {
+      setIsDeploymentLoading(true)
+      await switchChainAsync({ chainId: chain.id })
+      const { safeOperations } = await sendSafeOperationAsync({ transactions })
+      const deploymentUserOpLink = `https://jiffyscan.xyz/userOpHash/${safeOperations?.userOperationHash}?network=${chain.name.toLowerCase()}`
+      setDeploymentUserOp(deploymentUserOpLink)
+      setIsDeploymentLoading(false)
+    } catch(e) {
+      setDeploymentUserOp('')
+      setIsDeploymentLoading(false)
+    }
   }
 
-  return (
-    <>
-      {isDeploymentLoading ? (
-        <span> Deployment Loading...</span>
-      ) : (
-        showDeploySafeButton && (
-          <button onClick={deploySafeAccount}>Deploy Safe</button>
-        )
-      )}
+  if (isDeploymentLoading) {
+    return <span>Deploying account...</span>
+  }
 
-      {deploymentUserOp && (
-        <a href={deploymentUserOp} target="_blank">
-          Check the deployment transaction
-        </a>
-      )}
-    </>
-  )
+  if (showDeploySafeButton) {
+    return <button onClick={deploySafeAccount}>Deploy Safe</button>
+  }
+
+  if (deploymentUserOp) {
+    return (
+      <a href={deploymentUserOp} target="_blank">
+        <span>Deployment transaction</span>
+      </a>
+    )
+  }
 }

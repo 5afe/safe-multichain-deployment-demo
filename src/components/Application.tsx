@@ -25,35 +25,36 @@ export default function Application() {
       <div className={styles.signer}>
         <h1>Multichain Safe Deployments</h1>
         <button onClick={() => disconnect()}>Disconnect</button>
-        <p className={styles.signer}>Owner: {address}</p>
+        <pre className={styles.connectedAddress}>{address}</pre>
       </div>
-      <h1>Safe Accounts</h1>
-      {chains.map((chain) => {
-        const BUNDLER_URL = `https://api.pimlico.io/v2/${chain.id}/rpc?apikey=${PIMLICO_API_KEY}`
-        const PAYMASTER_URL = `https://api.pimlico.io/v2/${chain.id}/rpc?apikey=${PIMLICO_API_KEY}`
+      <div className={styles.main}>
+        {chains.map((chain) => {
+          const BUNDLER_URL = `https://api.pimlico.io/v2/${chain.id}/rpc?apikey=${PIMLICO_API_KEY}`
+          const PAYMASTER_URL = `https://api.pimlico.io/v2/${chain.id}/rpc?apikey=${PIMLICO_API_KEY}`
 
-        const config = createConfig({
-          chain: chain as any,
-          provider: rpcUrls[chain.id] || chain.rpcUrls.default.http[0],
-          signer: address,
-          safeOptions: {
-            owners: [address],
-            threshold: 1,
-            saltNonce: '123'
-          },
-          safeOperationOptions: {
-            isSponsored: true,
-            bundlerUrl: BUNDLER_URL,
-            paymasterUrl: PAYMASTER_URL
-          }
-        })
+          const config = createConfig({
+            chain: chain as any,
+            provider: rpcUrls[chain.id] || chain.rpcUrls.default.http[0],
+            signer: address,
+            safeOptions: {
+              owners: [address],
+              threshold: 1,
+              saltNonce: '123'
+            },
+            safeOperationOptions: {
+              isSponsored: true,
+              bundlerUrl: BUNDLER_URL,
+              paymasterUrl: PAYMASTER_URL
+            }
+          })
 
-        return (
-          <SafeProvider config={config} key={chain.id}>
-            <SafeAccount chain={chain} ownerAddress={address} />
-          </SafeProvider>
-        )
-      })}
+          return (
+            <SafeProvider config={config} key={chain.id}>
+              <SafeAccount chain={chain} ownerAddress={address} />
+            </SafeProvider>
+          )
+        })}
+      </div>
     </>
   )
 }
