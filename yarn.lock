@@ -645,36 +645,36 @@
   resolved "https://registry.yarnpkg.com/@rushstack/eslint-patch/-/eslint-patch-1.10.4.tgz#427d5549943a9c6fce808e39ea64dbe60d4047f1"
   integrity sha512-WJgX9nzTqknM393q1QJDJmoW28kUfEnybeTfVNcNAPnIx210RXm2DiXiHzfNPJNIUUb1tJnz/l4QGtJ30PgWmA==
 
-"@safe-global/api-kit@^2.5.3":
-  version "2.5.3"
-  resolved "https://registry.yarnpkg.com/@safe-global/api-kit/-/api-kit-2.5.3.tgz#8b0e996836a55e1c4cac6609b97a46c48bcb58fc"
-  integrity sha512-BHKKKohtM6cqtWmu2BIBl5YVMFeIzE1kBe2kfDi0JG9UbzTKYUYU8d/RnteFe5Nj/KiO7F7bJ708Z7ZxQ9Ap0g==
+"@safe-global/api-kit@^2.5.5-alpha.0":
+  version "2.5.5-alpha.0"
+  resolved "https://registry.yarnpkg.com/@safe-global/api-kit/-/api-kit-2.5.5-alpha.0.tgz#08b7cd6e874f94451e0e04fee590ad462de6b9fd"
+  integrity sha512-KJIzvmBLPqVOHq3zmN9m7fDFTbEyAAOyrfVS+ZTGqzXHFanA4dHWFBU9qwDvQTMQljZMqonKYbKoS2wo8BlKaw==
   dependencies:
-    "@safe-global/protocol-kit" "^5.0.3"
+    "@safe-global/protocol-kit" "^5.0.5-alpha.0"
     "@safe-global/types-kit" "^1.0.0"
     node-fetch "^2.7.0"
     viem "^2.21.8"
 
-"@safe-global/protocol-kit@^5.0.3":
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/@safe-global/protocol-kit/-/protocol-kit-5.0.3.tgz#187cfdeaf892c832265cb356d0ef5e230cb8fc4f"
-  integrity sha512-xVpuj1Ge/XYdLucPe36MXl09yK83f3drPqFK0UPhrONg//SP/K/sgyXnKy5o4zJrjidNV9V0PV7Xw84HOqOxtg==
+"@safe-global/protocol-kit@^5.0.5-alpha.0":
+  version "5.0.5-alpha.0"
+  resolved "https://registry.yarnpkg.com/@safe-global/protocol-kit/-/protocol-kit-5.0.5-alpha.0.tgz#3848121dfaa2c7ea206900233a3d1cf1a9713a59"
+  integrity sha512-CYVyxjocb6Mm6Xt7M0ZNSRGELwSHZlFY24azEAd0AGK7S5XCLI3ircyzH9HbxPa8chRa90xrrv4urIO6GBzoiQ==
   dependencies:
     "@noble/hashes" "^1.3.3"
-    "@safe-global/safe-deployments" "^1.37.12"
+    "@safe-global/safe-deployments" "^1.37.14"
     "@safe-global/safe-modules-deployments" "^2.2.4"
     "@safe-global/types-kit" "^1.0.0"
     abitype "^1.0.2"
     semver "^7.6.3"
     viem "^2.21.8"
 
-"@safe-global/relay-kit@^3.2.3":
-  version "3.2.3"
-  resolved "https://registry.yarnpkg.com/@safe-global/relay-kit/-/relay-kit-3.2.3.tgz#1c3c2749747d90b09b76763e7ef7c8443395a267"
-  integrity sha512-jA72DaOC8p/jgEK3kmXyYwqsiAvGdEcHy60owVvsWjkJXSaBFPkPAwKlawnhbmE+b5cb11yNJQ22WvVO0I5+PQ==
+"@safe-global/relay-kit@^3.3.0-alpha.0":
+  version "3.3.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/@safe-global/relay-kit/-/relay-kit-3.3.0-alpha.0.tgz#da23b2d9c7973f7db2c709158cfc82d4e51bfc0c"
+  integrity sha512-/woury8b8BHyugAHMhcviW4FrxXVY5U0ke1O1+btrRiq64q0VX86lMbuPnoFpDetlouxNvP0pSz2UyuGCPWeNg==
   dependencies:
     "@gelatonetwork/relay-sdk" "^5.5.0"
-    "@safe-global/protocol-kit" "^5.0.3"
+    "@safe-global/protocol-kit" "^5.0.5-alpha.0"
     "@safe-global/safe-modules-deployments" "^2.2.4"
     "@safe-global/types-kit" "^1.0.0"
     viem "^2.21.8"
@@ -695,10 +695,10 @@
     "@safe-global/safe-gateway-typescript-sdk" "^3.5.3"
     viem "^2.1.1"
 
-"@safe-global/safe-deployments@^1.37.12":
-  version "1.37.13"
-  resolved "https://registry.yarnpkg.com/@safe-global/safe-deployments/-/safe-deployments-1.37.13.tgz#9965d6c5669db526a472a0576828063aa50234df"
-  integrity sha512-DXDbyW+pSK5W+eyrT7I2VHgHjCUhiXgcmSjekCzwmzrRXB5sW36DLLDwfC5c1gvo26ix6NcIGRSk2sf68BHdeg==
+"@safe-global/safe-deployments@^1.37.14":
+  version "1.37.14"
+  resolved "https://registry.yarnpkg.com/@safe-global/safe-deployments/-/safe-deployments-1.37.14.tgz#31c1d1ff924d94ce639c136bef154de3adf5f75e"
+  integrity sha512-uHpYizq52j1arwWRxHbEbrZsECD5tG87NwLo/xDViRVw/GIrkRC6HerkzfZwiHVjVrC8gN8o3ApLsknYbxrF4w==
   dependencies:
     semver "^7.6.2"
 
@@ -712,21 +712,23 @@
   resolved "https://registry.yarnpkg.com/@safe-global/safe-modules-deployments/-/safe-modules-deployments-2.2.4.tgz#6e3b22af3a4eeba8e0a8f0952e575d25c5be216e"
   integrity sha512-m396ZrBPhZVYkapTTIuizyOOtoZsCKbicl0ztgDFfDbi7KbS6AtDP6cV89AYosQxUQS+v0q4ksQd30/j3L1BtQ==
 
-"@safe-global/safe-react-hooks@file:.yalc/@safe-global/safe-react-hooks":
-  version "0.1.0"
+"@safe-global/safe-react-hooks@0.2.0-alpha.0":
+  version "0.2.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/@safe-global/safe-react-hooks/-/safe-react-hooks-0.2.0-alpha.0.tgz#d7b25ffc716553acad4dc0b390364a2c44a81196"
+  integrity sha512-q797ETE7/XKlt5xAw6ACN5btvaqYkldi5Fz1qg7tIpVNVKLGTCPWpJ+ZrL0CE0TRDiyO2gFQo4Vot8Zq68O3Tw==
   dependencies:
-    "@safe-global/sdk-starter-kit" "^1.0.1"
+    "@safe-global/sdk-starter-kit" "1.1.0-alpha.0"
     viem "^2.18.6"
     wagmi "^2.12.2"
 
-"@safe-global/sdk-starter-kit@^1.0.1":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@safe-global/sdk-starter-kit/-/sdk-starter-kit-1.0.3.tgz#4bf29558d75ab02a558f2fff686a8a4dd51b6d3a"
-  integrity sha512-KjZ2PohiCmGGqtZaUlf4VN8rFrIMNvAofgfa/VfJuBactFneN+yqCtl4a5hq9q5TYDCvPiA/N6nkaZmjBCZe1g==
+"@safe-global/sdk-starter-kit@1.1.0-alpha.0":
+  version "1.1.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/@safe-global/sdk-starter-kit/-/sdk-starter-kit-1.1.0-alpha.0.tgz#4f6da2fe5688553cc761e7a19036614a25ef5024"
+  integrity sha512-m3FtP1pBGS/cXV1eZRIg3eeqjQQSDMS+A4/OSr8vvIi4OgT0v67CTCMMo7J1XEnql1ptzWiTCbWgdj+V1l9vZA==
   dependencies:
-    "@safe-global/api-kit" "^2.5.3"
-    "@safe-global/protocol-kit" "^5.0.3"
-    "@safe-global/relay-kit" "^3.2.3"
+    "@safe-global/api-kit" "^2.5.5-alpha.0"
+    "@safe-global/protocol-kit" "^5.0.5-alpha.0"
+    "@safe-global/relay-kit" "^3.3.0-alpha.0"
     "@safe-global/types-kit" "^1.0.0"
     viem "^2.21.8"
 
@@ -4429,7 +4431,16 @@ strict-uri-encode@^2.0.0:
   resolved "https://registry.yarnpkg.com/strict-uri-encode/-/strict-uri-encode-2.0.0.tgz#b9c7330c7042862f6b142dc274bbcc5866ce3546"
   integrity sha512-QwiXZgpRcKkhTj2Scnn++4PKtWsH0kpzZ62L2R6c/LUVYv7hVnZqcg2+sMuT6R7Jusu1vviK/MFsu6kNJfWlEQ==
 
-"string-width-cjs@npm:string-width@^4.2.0", string-width@^4.1.0, string-width@^4.2.0:
+"string-width-cjs@npm:string-width@^4.2.0":
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
+  integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
+  dependencies:
+    emoji-regex "^8.0.0"
+    is-fullwidth-code-point "^3.0.0"
+    strip-ansi "^6.0.1"
+
+string-width@^4.1.0, string-width@^4.2.0:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -4524,7 +4535,14 @@ string_decoder@~1.1.1:
   dependencies:
     safe-buffer "~5.1.0"
 
-"strip-ansi-cjs@npm:strip-ansi@^6.0.1", strip-ansi@^6.0.0, strip-ansi@^6.0.1:
+"strip-ansi-cjs@npm:strip-ansi@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
+  integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
+  dependencies:
+    ansi-regex "^5.0.1"
+
+strip-ansi@^6.0.0, strip-ansi@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
   integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
