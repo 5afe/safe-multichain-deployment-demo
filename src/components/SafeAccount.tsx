@@ -20,8 +20,6 @@ export default function SafeAccount({
   const { data: safeInfo } = getSafeInfo()
 
   const safeAddress = safeInfo?.address
-  const isSafeDeployed = safeInfo?.isDeployed
-  const showDeploySafeButton = safeAddress && !isSafeDeployed && walletClient
 
   const chainLabel = chainShortname[chain.id]
   const baseWalletUrl = `https://app.safe.global/home?safe=`
@@ -47,11 +45,12 @@ export default function SafeAccount({
             <pre>{safeInfo?.address}</pre>
           </a>
 
-          {showDeploySafeButton && (
+          {walletClient && (
             <DeploySafeButton
               chain={chain}
-              safeAddress={safeInfo?.address}
               signer={ownerAddress}
+              safeAddress={safeInfo?.address}
+              isDeployed={!!safeInfo?.isDeployed}
               walletClient={walletClient}
             />
           )}

@@ -3,23 +3,31 @@ import {
   createConfig,
   useSendSafeOperation
 } from '@safe-global/safe-react-hooks'
+import { useState } from 'react'
 import { Chain } from 'viem'
 import { useSwitchChain } from 'wagmi'
 
 type DeploySafeButtonProps = {
   chain: Chain
+  signer: string
   safeAddress: string
-  signer: any //
-  walletClient: any //
+  isDeployed: boolean
+  walletClient: any
 }
 
 export default function DeploySafeButton({
   chain,
-  safeAddress,
   signer,
+  safeAddress,
+  isDeployed,
   walletClient
 }: DeploySafeButtonProps) {
   const { switchChainAsync } = useSwitchChain()
+
+  const showDeploySafeButton = safeAddress && !isDeployed && walletClient
+
+  const [isDeploymentLoading, setIsDeploymentLoading] = useState(false)
+  const [deploymentUserOp, setDeploymentUserOp] = useState('')
 
   const BUNDLER_URL = `https://api.pimlico.io/v2/${chain.id}/rpc?apikey=${PIMLICO_API_KEY}`
   const PAYMASTER_URL = `https://api.pimlico.io/v2/${chain.id}/rpc?apikey=${PIMLICO_API_KEY}`
@@ -53,9 +61,31 @@ export default function DeploySafeButton({
   ]
 
   async function deploySafeAccount() {
+    setIsDeploymentLoading(true)
     await switchChainAsync({ chainId: chain.id })
-    await sendSafeOperationAsync({ transactions })
+    const { safeOperations } = await sendSafeOperationAsync({ transactions })
+
+    const deploymentUserOpLink = `https://jiffyscan.xyz/userOpHash/${safeOperations?.userOperationHash}?network=${chain.name.toLowerCase()}`
+
+    setDeploymentUserOp(deploymentUserOpLink)
+    setIsDeploymentLoading(false)
   }
 
-  return <button onClick={deploySafeAccount}>Deploy Safe</button>
+  return (
+    <>
+      {isDeploymentLoading ? (
+        <span> Deployment Loading...</span>
+      ) : (
+        showDeploySafeButton && (
+          <button onClick={deploySafeAccount}>Deploy Safe</button>
+        )
+      )}
+
+      {deploymentUserOp && (
+        <a href={deploymentUserOp} target="_blank">
+          Check the deployment transaction
+        </a>
+      )}
+    </>
+  )
 }
