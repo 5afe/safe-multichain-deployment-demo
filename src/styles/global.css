@@ -2,8 +2,10 @@
   color: #ffffff;
   display: flex;
   flex-direction: column;
-  align-items: center;
   font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  --border: 1px solid red;
+  min-height: 100vh;
 }
 
 html,
@@ -18,19 +20,26 @@ body {
 }
 
 h1 {
-  color: #fff; /* #121312 */
+  color: #12ff80;
   font-size: 32px;
   margin-bottom: 24px;
   width: 100%;
 }
 
 h2 {
-  color: #fff; /* #121312 */
+  color: #fff;
   font-size: 16px;
+  width: 100%;
 }
 
 a {
-  text-decoration: none;
+  color: #12ff80;
+}
+a:hover {
+  color: #0cb259;
+}
+
+span {
   color: #12ff80;
 }
 
@@ -42,6 +51,7 @@ button {
   cursor: pointer;
   font-weight: bold;
   padding: 8px 24px;
+  margin-right: 10px;
 }
 
 button:hover {
@@ -49,21 +59,12 @@ button:hover {
   color: #000000;
 }
 
-main {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 30px;
-  width: 800px;
-  min-height: 100vh;
-}
-
 pre {
-  border: 1px solid #303033; /* #dcdee0 */
+  border: 1px solid #303033;
   border-radius: 8px;
-  color: #a1a3a7; /* #636669 */
-  margin: 24px 0;
+  color: #ffffff;
+  font-size: 14px;
+  margin: 16px 0;
   padding: 24px;
   text-align: center;
   width: 100%;
@@ -72,4 +73,7 @@ pre {
 footer {
   padding: 50px 0 100px 0;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
