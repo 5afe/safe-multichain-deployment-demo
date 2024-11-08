@@ -1,4 +1,4 @@
-import { chainShortname } from '@/config'
+import { chainLogo, chainShortname } from '@/config'
 import styles from '@/styles/styles.module.css'
 import { useSafe } from '@safe-global/safe-react-hooks'
 import Image from 'next/image'
@@ -8,16 +8,13 @@ import DeploySafeButton from './DeploySafeButton'
 
 type SafeAccountComponentType = {
   chain: Chain
-  chainLogo: string
   ownerAddress: string
 }
 
 export default function SafeAccount({
   chain,
-  chainLogo,
   ownerAddress
 }: SafeAccountComponentType) {
-  //const [safeInfo, setSafeInfo] = useState()
   const { data: walletClient } = useWalletClient()
   const { getSafeInfo } = useSafe()
   const { data: safeInfo } = getSafeInfo()
@@ -29,14 +26,13 @@ export default function SafeAccount({
   const chainLabel = chainShortname[chain.id]
   const baseWalletUrl = `https://app.safe.global/home?safe=`
   const walletUrl = `${baseWalletUrl}${chainLabel}:${safeAddress}`
-  console.log(chainLabel)
-  
+
   return (
     <div className={styles.card}>
       <div className={styles.title}>
         <Image
           aria-hidden
-          src={chainLogo}
+          src={chainLogo[chain.id]}
           alt={`${chain.name} icon`}
           height={30}
           width={30}
@@ -50,6 +46,7 @@ export default function SafeAccount({
           <a href={walletUrl} target="_blank">
             <pre>{safeInfo?.address}</pre>
           </a>
+
           {showDeploySafeButton && (
             <DeploySafeButton
               chain={chain}

@@ -1,4 +1,4 @@
-import { PIMLICO_API_KEY, chainLogo, chains, rpcUrls } from '@/config'
+import { PIMLICO_API_KEY, chains, rpcUrls } from '@/config'
 import styles from '@/styles/styles.module.css'
 import { useConnectModal } from '@rainbow-me/rainbowkit'
 import { SafeProvider, createConfig } from '@safe-global/safe-react-hooks'
@@ -15,23 +15,17 @@ export default function Application() {
     return (
       <div className={styles.signer}>
         <h1>Multichain Safe Deployments</h1>
-        <button onClick={openConnectModal}>
-          Connect
-        </button>
+        <button onClick={openConnectModal}>Connect</button>
       </div>
     )
   }
-  
+
   return (
     <>
       <div className={styles.signer}>
         <h1>Multichain Safe Deployments</h1>
-        <button onClick={() => disconnect()}>
-          Disconnect
-        </button>
-        <p className={styles.signer}>
-          Owner: {address}
-        </p>
+        <button onClick={() => disconnect()}>Disconnect</button>
+        <p className={styles.signer}>Owner: {address}</p>
       </div>
       <h1>Safe Accounts</h1>
       {chains.map((chain) => {
@@ -53,14 +47,10 @@ export default function Application() {
             paymasterUrl: PAYMASTER_URL
           }
         })
-        
+
         return (
           <SafeProvider config={config} key={chain.id}>
-            <SafeAccount
-              chain={chain}
-              ownerAddress={address}
-              chainLogo={chainLogo[chain.id]}
-            />
+            <SafeAccount chain={chain} ownerAddress={address} />
           </SafeProvider>
         )
       })}

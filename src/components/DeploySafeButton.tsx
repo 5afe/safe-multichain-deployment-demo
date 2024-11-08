@@ -9,7 +9,7 @@ import { useSwitchChain } from 'wagmi'
 type DeploySafeButtonProps = {
   chain: Chain
   safeAddress: string
-  signer: any, //
+  signer: any //
   walletClient: any //
 }
 
@@ -19,7 +19,7 @@ export default function DeploySafeButton({
   signer,
   walletClient
 }: DeploySafeButtonProps) {
-  const { switchChain } = useSwitchChain()
+  const { switchChainAsync } = useSwitchChain()
 
   const BUNDLER_URL = `https://api.pimlico.io/v2/${chain.id}/rpc?apikey=${PIMLICO_API_KEY}`
   const PAYMASTER_URL = `https://api.pimlico.io/v2/${chain.id}/rpc?apikey=${PIMLICO_API_KEY}`
@@ -42,22 +42,20 @@ export default function DeploySafeButton({
     }
   })
 
-  const { sendSafeOperation } = useSendSafeOperation({ config })
+  const { sendSafeOperationAsync } = useSendSafeOperation({ config })
 
-  const transactions = [{
-    to: safeAddress,
-    data: '0x',
-    value: '0'
-  }]
+  const transactions = [
+    {
+      to: safeAddress,
+      data: '0x',
+      value: '0'
+    }
+  ]
 
   async function deploySafeAccount() {
-    switchChain({ chainId: chain.id })
-    sendSafeOperation({ transactions })
+    await switchChainAsync({ chainId: chain.id })
+    await sendSafeOperationAsync({ transactions })
   }
 
-  return (
-    <button onClick={deploySafeAccount}>
-      Deploy Safe
-    </button>
-  )
+  return <button onClick={deploySafeAccount}>Deploy Safe</button>
 }
