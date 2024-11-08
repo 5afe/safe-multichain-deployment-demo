@@ -1,0 +1,18 @@
+.signer {
+  margin-top: 12px;
+}
+
+.card {
+  background: #1c1c1c;
+  border-radius: 6px;
+  margin-bottom: 24px;
+  padding: 24px;
+  text-align: left;
+  width: 100%;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

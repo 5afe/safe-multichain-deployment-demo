@@ -13,21 +13,27 @@ export default function Application() {
 
   if (!isSignerConnected) {
     return (
-      <button onClick={openConnectModal}>
-        Connect
-      </button>
+      <div className={styles.signer}>
+        <h1>Multichain Safe Deployments</h1>
+        <button onClick={openConnectModal}>
+          Connect
+        </button>
+      </div>
     )
   }
   
   return (
-    <div>
-      <button onClick={() => disconnect()}>
-        Disconnect
-      </button>
-      <p className={styles.ownerlabel}>
-        Owner: {address}
-      </p>
-      <h2 className={styles.safetitle}>Safe Accounts</h2>
+    <>
+      <div className={styles.signer}>
+        <h1>Multichain Safe Deployments</h1>
+        <button onClick={() => disconnect()}>
+          Disconnect
+        </button>
+        <p className={styles.signer}>
+          Owner: {address}
+        </p>
+      </div>
+      <h1>Safe Accounts</h1>
       {chains.map((chain) => {
         const BUNDLER_URL = `https://api.pimlico.io/v2/${chain.id}/rpc?apikey=${PIMLICO_API_KEY}`
         const PAYMASTER_URL = `https://api.pimlico.io/v2/${chain.id}/rpc?apikey=${PIMLICO_API_KEY}`
@@ -58,6 +64,6 @@ export default function Application() {
           </SafeProvider>
         )
       })}
-    </div>
+    </>
   )
 }
