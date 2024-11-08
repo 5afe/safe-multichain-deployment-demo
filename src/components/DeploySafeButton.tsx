@@ -83,7 +83,7 @@ export default function DeploySafeButton({
 
       {deploymentUserOp && (
         <a href={deploymentUserOp} target="_blank">
-          check deployment User Operation
+          Check the deployment user operation
         </a>
       )}
     </>
