@@ -27,7 +27,7 @@ export default function DeploySafeButton({
   const { switchChainAsync } = useSwitchChain()
 
   const showDeploySafeButton = safeAddress && !isDeployed && walletClient
-  
+
   const BUNDLER_URL = `https://api.pimlico.io/v2/${chain.id}/rpc?apikey=${PIMLICO_API_KEY}`
   const PAYMASTER_URL = `https://api.pimlico.io/v2/${chain.id}/rpc?apikey=${PIMLICO_API_KEY}`
 
@@ -66,7 +66,7 @@ export default function DeploySafeButton({
       const deploymentUserOpLink = `https://jiffyscan.xyz/userOpHash/${safeOperations?.userOperationHash}?network=${chain.name.toLowerCase()}`
       setDeploymentUserOp(deploymentUserOpLink)
       setIsDeploymentLoading(false)
-    } catch(e) {
+    } catch (e) {
       setDeploymentUserOp('')
       setIsDeploymentLoading(false)
     }
