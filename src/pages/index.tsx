@@ -37,7 +37,14 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Check the Safe developer docs
+              Documentation
+            </a>
+            <a
+              href="https://github.com/5afe/safe-multichain-deployment-demo"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub repository
             </a>
           </footer>
         </RainbowKitProvider>
