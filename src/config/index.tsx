@@ -2,7 +2,7 @@ import { base, gnosis, polygon, sepolia } from 'viem/chains'
 
 export const chains = [gnosis, base, polygon, sepolia] as const
 
-export const PIMLICO_API_KEY = 'pim_mAzX6WFFpSLoZDDWDKHsSE'
+export const PIMLICO_API_KEY = process.env.NEXT_PUBLIC_PIMLICO_API_KEY
 
 export const chainLogo: Record<number, string> = {
   [gnosis.id]: '/gnosis.png',

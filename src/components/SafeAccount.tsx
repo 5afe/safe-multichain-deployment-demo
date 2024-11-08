@@ -41,7 +41,9 @@ export default function SafeAccount({
         <pre>Loading...</pre>
       ) : (
         <>
-          <pre>{safeInfo?.address}</pre>
+          <pre className={!safeInfo.isDeployed ? styles.notDeployed : ''}>
+            {safeInfo?.address}
+          </pre>
           {!!safeInfo?.isDeployed && (
             <a href={walletUrl} target="_blank">
               <button>Open app</button>

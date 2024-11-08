@@ -20,6 +20,10 @@ cd safe-multichain-deployment-demo
 pnpm install
 ```
 
+Create a file named `.env` at the root of your project, and add your Pimlico API key to it:
+
+echo "NEXT_PUBLIC_PIMLICO_API_KEY='your_pimlico_api_key_goes_here'" > .env
+
 Run the local development server with the following command:
 
 ```bash

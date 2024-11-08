@@ -38,3 +38,7 @@
   align-items: center;
   gap: 10px;
 }
+
+.notDeployed {
+  color: #666666;
+}
